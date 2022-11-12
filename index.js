@@ -32,7 +32,7 @@ async function sleep(t) {
               `https://api.cloudflare.com/client/v4/zones/${process.env.zoneId}/dns_records/${process.env.recordId}`,
               {
                 type: "A",
-                name: "7ps.xyz",
+                name: process.env.domain,
                 content: myIp,
                 ttl: 3600,
                 proxied: true,
@@ -45,7 +45,9 @@ async function sleep(t) {
           }
         }
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
 
     await sleep(IP_CHECK_INTERVAL);
   }
